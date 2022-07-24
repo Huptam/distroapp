@@ -15,26 +15,41 @@
                                 <div class="card-body">
                                     <form>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="cedula" type="text" placeholder="Digite su cédula"/>
+                                            <input class="form-control" id="cedula" type="text"
+                                                placeholder="Digite su cédula" value="{{ old('cedula') }}"/>
                                             <label for="cedula">Cédula</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="password" type="password" placeholder="Digite su contraseña"/>
+                                            <input class="form-control" id="password" type="password"
+                                                placeholder="Digite su contraseña" value="{{ old('cedula') }}"/>
                                             <label for="password">Contraseña</label>
                                         </div>
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" id="inputRememberPassword" type="checkbox" value=""/>
-                                            <label class="form-check-label" for="inputRememberPassword">Recordar contraseña</label>
+                                            <input class="form-check-input" id="inputRememberPassword" type="checkbox"
+                                                value="" />
+                                            <label class="form-check-label" for="inputRememberPassword">Recordar
+                                                contraseña</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="{{route('resetPassword')}}">¿Olvidaste tu contraseña?</a>
-                                            {{-- <button type="submit" class="btn btn-primary">Iniciar Sesión</button> --}}
-                                            <a class="btn btn-primary" href="{{route('dashboard')}}">Iniciar Sesión</a>
+                                            <a class="small" href="{{ route('resetPassword') }}">¿Olvidaste tu
+                                                contraseña?</a>
+                                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                                            {{-- <a class="btn btn-primary" href="{{ route('dashboard') }}">Iniciar Sesión</a> --}}
                                         </div>
                                     </form>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="{{route('register')}}">¿No tienes cuenta? ¡Registrate!</a></div>
+                                    <div class="small"><a href="{{ route('register') }}">¿No tienes cuenta?
+                                            ¡Registrate!</a></div>
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,7 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3 mb-md-0">
                                     <input class="form-control" id="cedula" type="text"
-                                        placeholder="Digite su cédula" required />
+                                        placeholder="Digite su cédula" required/>
                                     <label for="cedula">Cédula</label>
                                 </div>
                             </div>
