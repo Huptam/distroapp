@@ -72,6 +72,49 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Imagen</th>
+                            <th>Código de Barra</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Estatus</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Imagen</th>
+                            <th>Código de Barra</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Estatus</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {{-- @foreach ($products as $product)
+                            <tr>
+                                <td>{{ $product->name }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Acciones</td>
+                            </tr>
+                        @endforeach --}}
+                    </tbody>
+                </table>
+                {{-- <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
                             <th>Distribuidor</th>
                             <th>Ciudad</th>
                             <th>Cantidad</th>
@@ -547,7 +590,7 @@
                             <td>$112,000</td>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
