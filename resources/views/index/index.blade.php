@@ -33,8 +33,8 @@
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <a class="small" href="{{ route('resetPassword') }}">¿Olvidaste tu
                                                 contraseña?</a>
-                                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                                            {{-- <a class="btn btn-primary" href="{{ route('dashboard') }}">Iniciar Sesión</a> --}}
+                                            {{-- <button type="submit" class="btn btn-primary">Iniciar Sesión</button> --}}
+                                             <a class="btn btn-primary" href="{{ route('dashboardAdmin') }}">Iniciar Sesión</a>
                                         </div>
                                     </form>
                                     @if ($errors->any())
