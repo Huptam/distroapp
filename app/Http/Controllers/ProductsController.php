@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductStoreRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -19,6 +20,12 @@ class ProductsController extends Controller
         return view('admin.dashboard', compact('products'));
     }
 
+    public function gestionar()
+    {
+        $products = Product::all();
+        return view('admin.gestionarProducto', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +33,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return redirect(route('agregarProducto'));
+        return view('admin.agregarProducto');
     }
 
     /**
@@ -42,7 +49,7 @@ class ProductsController extends Controller
         if ($request->hasFile('image')) {
             $image_path = $request->file('image')->store('products', 'public');
         }
-        //dd($request);
+
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -54,9 +61,9 @@ class ProductsController extends Controller
         ]);
 
         if (!$product) {
-            return redirect()->back()->with('error', 'Sorry, there a problem while creating product.');
+            return redirect()->back(); //->with('mensaje', $mensaje=false);
         }
-        return redirect()->route('agregarProducto')->with('success', 'Success, you product have been created.');
+        return redirect()->route('agregarProducto', ['mensaje'=>true]); //->with('mensaje', $mensaje=true);
     }
 
     /**
@@ -76,9 +83,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.editarProducto')->with('product', $product);
     }
 
     /**
@@ -88,9 +96,20 @@ class ProductsController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $datosProducto = request();
+
+        if ($request->hasFile('Foto')) {
+            $product = Product::findOrFail($id);
+            Storage::delete('public/'.$product->image);
+            $datosProducto['image'] = $request->file('Foto')->store('uploads','public');
+        }
+
+        Product::where('id','=',$id)->update($datosProducto);
+
+        $product = Product::findOrFail($id);
+        return view('empleado.edit', compact('prod$product'));
     }
 
     /**
@@ -99,8 +118,9 @@ class ProductsController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect(route('gestionarProducto')); //->with('flash_message', 'Student Deleted!');
     }
 }
