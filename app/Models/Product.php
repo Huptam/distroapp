@@ -17,6 +17,8 @@ class Product extends Model
         'barcode',
         'price',
         'quantity',
-        'status'
+        'status',
+        'created_at',
+        'updated_at'
     ];
 }
