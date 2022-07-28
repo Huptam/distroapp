@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,21 +45,23 @@ Route::get('/listarAdmin', function () {
 })->name('listarAdmin');
 
 //Administrador dashboard
-Route::get('/dashboardAdmin', function () {
-    return view('admin.dashboard');
-})->name('dashboardAdmin');
+Route::get('/dashboardAdmin', [ProductsController::class, 'index'])->name('dashboardAdmin');
 //Administrador perfil
 Route::get('/perfilAdmin', function () {
     return view('admin.perfil');
 })->name('perfilAdmin');
-//Administrador agregar productos
-Route::get('/agregarProducto', function () {
-    return view('admin.agregarProducto');
-})->name('agregarProducto');
+//Administrador vista agregar producto
+Route::get('/agregarProducto', [ProductsController::class, 'create'])->name('agregarProducto');
+//Administrador agregar producto
+Route::post('/storeProducto', [ProductsController::class, 'store'])->name('storeProducto');
 //Administrador gestionar productos
-Route::get('/gestionarProducto', function () {
-    return view('admin.gestionarProducto');
-})->name('gestionarProducto');
+Route::get('/gestionarProducto', [ProductsController::class, 'gestionar'])->name('gestionarProducto');
+//Administrador vistar editar producto
+Route::get('/editarProducto/{id}', [ProductsController::class, 'edit'])->name('editarProducto');
+//Administrador editar producto
+//Route::get('/updateProducto/{id}', [ProductsController::class, 'update'])->name('updateProducto');
+//Administrador eliminar producto
+Route::delete('/eliminarProducto/{id}', [ProductsController::class, 'destroy'])->name('eliminarProducto');
 //Administrador registar clientes
 Route::get('/registrarCliente', function () {
     return view('admin.registrarCliente');
