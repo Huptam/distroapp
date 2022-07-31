@@ -59,7 +59,7 @@ Route::get('/gestionarProducto', [ProductsController::class, 'gestionar'])->name
 //Administrador vistar editar producto
 Route::get('/editarProducto/{id}', [ProductsController::class, 'edit'])->name('editarProducto');
 //Administrador editar producto
-//Route::get('/updateProducto/{id}', [ProductsController::class, 'update'])->name('updateProducto');
+Route::put('/updateProducto/{id}', [ProductsController::class, 'update'])->name('updateProducto');
 //Administrador eliminar producto
 Route::delete('/eliminarProducto/{id}', [ProductsController::class, 'destroy'])->name('eliminarProducto');
 //Administrador registar clientes

@@ -47,7 +47,7 @@ class ProductsController extends Controller
         $image_path = '';
 
         if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('products', 'public');
+            $image_path = $request->file('image')->store('uploads', 'public');
         }
 
         $product = Product::create([
@@ -63,7 +63,7 @@ class ProductsController extends Controller
         if (!$product) {
             return redirect()->back(); //->with('mensaje', $mensaje=false);
         }
-        return redirect()->route('agregarProducto', ['mensaje'=>true]); //->with('mensaje', $mensaje=true);
+        return redirect()->route('agregarProducto'); //->with('mensaje', $mensaje=true);
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('admin.editarProducto')->with('product', $product);
+        return view('admin.editarProducto', compact('product')); //->with('product', $product);
     }
 
     /**
@@ -98,18 +98,25 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosProducto = request();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'quantity' => 'required|integer',
+            'status' => 'required|boolean',
+        ]);
 
-        if ($request->hasFile('Foto')) {
+        $newInfo = $request->except('_token', '_method');
+
+        if ($request->hasFile('image')) {
             $product = Product::findOrFail($id);
             Storage::delete('public/'.$product->image);
-            $datosProducto['image'] = $request->file('Foto')->store('uploads','public');
+            $newInfo['image'] = $request->file('image')->store('uploads','public');
         }
 
-        Product::where('id','=',$id)->update($datosProducto);
-
-        $product = Product::findOrFail($id);
-        return view('empleado.edit', compact('prod$product'));
+        Product::where('id', $id)->update($newInfo);
+        return redirect()->route('gestionarProducto');
     }
 
     /**
