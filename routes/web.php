@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Login
+//Login (ladingpage)
 Route::get('/', function () {
     return view('index.index');
 })->name('index');
@@ -56,7 +56,9 @@ Route::get('/agregarProducto', [ProductsController::class, 'create'])->name('agr
 Route::post('/storeProducto', [ProductsController::class, 'store'])->name('storeProducto');
 //Administrador gestionar productos
 Route::get('/gestionarProducto', [ProductsController::class, 'gestionar'])->name('gestionarProducto');
-//Administrador vistar editar producto
+//Administrador vista mostrar producto
+Route::get('/producto/{id}/mostrar', [ProductsController::class, 'show'])->name('mostrarProducto');
+//Administrador vista editar producto
 Route::get('/editarProducto/{id}', [ProductsController::class, 'edit'])->name('editarProducto');
 //Administrador editar producto
 Route::put('/updateProducto/{id}', [ProductsController::class, 'update'])->name('updateProducto');

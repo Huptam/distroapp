@@ -116,7 +116,7 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>
-                                        {{ $product->status ? 'Active' : 'Inactive' }}
+                                        {{ $product->status ? 'Activo' : 'Inactivo' }}
                                 </td>
                                 <td>{{ $product->created_at }}</td>
                                 <td>{{ $product->updated_at }}</td>
@@ -135,7 +135,6 @@
         </div>
     </div>
 </main>
-
     {{-- @component('admin.main')
     @endcomponent --}}
 @endsection
