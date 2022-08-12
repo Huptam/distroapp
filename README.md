@@ -1,6 +1,6 @@
 ## Distro-App
 
-Proyecto Diplomado
+Proyecto Diplomado (NO COMPLETADO)
 
 ## License
 
